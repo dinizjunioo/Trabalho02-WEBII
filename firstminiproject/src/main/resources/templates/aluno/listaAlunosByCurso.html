@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <title>Alunos</title>
+
+</head>
+<body>
+  
+  <p>Lista de alunos cadastrados em <span th:text="${param.curso}"></span></p>
+
+  <div th:if="${not #lists.isEmpty(alunosPorCurso)}">
+    <ul>
+        <li th:each="aluno : ${alunosPorCurso}">
+            <span th:text="${aluno.primeiroNome} + ' ' + ${aluno.ultimoNome} + ' - Curso: ' + ${aluno.curso.nome}"></span>
+        </li>
+    </ul>
+    <br><br>
+    <p>Tabela com as informações</p>
+    <table>
+        <thead>
+            <tr>
+                <th th:text="Nome"></th>
+                <th th:text="Curso"></th>
+                <th th:text="Linguagem"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="aluno: ${alunosPorCurso}">
+                <td th:text="${aluno.primeiroNome}"></td>
+                <td th:text="${aluno.curso.nome}"></td>
+                <td th:text="${aluno.linguagem}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+    
+</div>
+<div th:if="${#lists.isEmpty(alunosPorCurso)}">
+    <p>Nenhum aluno cadastrado para este curso.</p>
+</div>
+
+<p>Total de estudantes no curso: 
+    <span th:text="${alunosPorCurso.size()} + ' estudantes cadastrados.'"></span>
+</p>
+<br>
+<a href="getListaAlunos">Voltar</a>
+<br>
+</body>
+
+</html>

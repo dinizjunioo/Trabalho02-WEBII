@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Aluno</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+    
+</head>
+<body>
+
+    <form action="#" th:action="@{/aluno/addAluno}" th:object="${aluno}" method="post">
+        <p>Primeiro Nome: <input type="text" th:field="*{primeiroNome}" placeholder="Insira seu nome" /></p>
+        <p>Último Nome: <input type="text" th:field="*{ultimoNome}" placeholder="Insira seu último nome" /></p>
+        <p>Curso: 
+            <select name="cursoSelecionado">
+                <option th:each="curso : ${cursos}" th:value="${curso.codigo}" th:text="${curso.nome}">
+            </select>
+        </p>
+        <h3>Linguagem de programação:</h3>
+        <ul> 
+            <li> 
+                <input type="radio" th:field="*{linguagem}" th:value="Java" th:text="Java"/>
+            </li>
+            <li> 
+                <input type="radio" th:field="*{linguagem}" th:value="C" th:text="C"/>
+            </li>
+            <li> 
+                <input type="radio" th:field="*{linguagem}" th:value="Python" th:text="Python"/>
+            </li>
+            <li> 
+                <input type="radio" th:field="*{linguagem}" th:value="Javascript" th:text="Javascript"/>
+            </li> 
+        </ul>
+        <h3>Sistemas Operacionais:</h3>
+        <p>
+            <div th:each="os : ${sistemasOperacionais}">
+                <input type="checkbox" th:field="*{sistemasOperacionais}" th:value="${os}" th:text="${os}" />
+            </div>
+            
+        </p>
+        <p><input type="submit" value="Adicionar" /></p>
+    </form>
+    
+</body>
+</html>
